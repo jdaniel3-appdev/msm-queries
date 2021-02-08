@@ -1,0 +1,70 @@
+<h1>Actor #<%= @actor_id.to_s %> details</h1>
+
+<a href="/actors" class = "btn btn-block btn-outline-secondary">
+  Go back
+</a>
+
+&nbsp;|&nbsp;
+
+<hr>
+
+<dl>
+<dt>Name</dt>
+  <dd>
+    <%= @actor.name %>
+  </dd>
+
+<dt>Dob</dt>
+  <dd>
+    <%= @actor.dob %>
+  </dd>
+
+<dt>Bio</dt>
+  <dd>
+    <%= @actor.bio %>
+  </dd>
+
+<dt>Image</dt>
+  <dd>
+    <img src=<%= @actor.image %> style="width:250px;">
+  </dd>
+
+<dt>Created at</dt>
+  <dd>
+    <%= time_ago_in_words(@actor.created_at) %> ago
+  </dd>
+
+<dt>Updated at</dt>
+  <dd>
+    <%= time_ago_in_words(@actor.updated_at) %> ago
+  </dd>
+
+<hr>
+
+<h2>Filmography</h2>
+
+<table border="1">
+  <tr>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th>Character name</th>
+    <th>Details</th>
+  </tr>
+
+  <% @list_of_movie_appearances.each do |a_thing| %>
+    <tr>
+    <td><%= a_thing.title %></td>
+    <td><%= a_thing.year %></td>
+    <td><%= @list_of_directors.where({:id => a_thing.director_id}).at(0).name %></td>
+    <% characters_array = @list_of_characters_played.where({:movie_id => a_thing.id, :actor_id => @actor_id}).at(0..-1) %>
+    <td><% characters_array.each do |character| %>
+          <p><%= p character.name %></p>
+        <% end %>
+    </td>
+    <% details_link = "/movies/" + a_thing.id.to_s %>
+    <td><a href=<%= details_link %>>Show details</a></td>
+    </tr>
+  <% end %>
+
+  </table>

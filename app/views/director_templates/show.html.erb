@@ -1,0 +1,68 @@
+<h1>Director #<%= @director_id.to_s %> details</h1>
+
+<a href="/directors" class = "btn btn-block btn-outline-secondary">
+  Go back
+</a>
+
+&nbsp;|&nbsp;
+
+<hr>
+
+<dl>
+<dt>Name</dt>
+  <dd>
+    <%= @director.name %>
+  </dd>
+
+<dt>Dob</dt>
+  <dd>
+    <%= @director.dob %>
+  </dd>
+
+<dt>Bio</dt>
+  <dd>
+    <%= @director.bio %>
+  </dd>
+
+<dt>Image</dt>
+  <dd>
+    <img src=<%= @director.image %> style="width:250px;">
+  </dd>
+
+<dt>Created at</dt>
+  <dd>
+    <%= time_ago_in_words(@director.created_at) %> ago
+  </dd>
+
+<dt>Updated at</dt>
+  <dd>
+    <%= time_ago_in_words(@director.updated_at) %> ago
+  </dd>
+
+<hr>
+
+<h2>Filmography</h2>
+
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th>Details</th>
+  </tr>
+
+  <% @list_of_movies_directed.each do |a_thing| %>
+    <tr>
+    <td><%= a_thing.id %></td>
+    <td><img src=<%= a_thing.image %> style="width:250px;"></td>
+    <td><%= a_thing.title %></td>
+    <td><%= a_thing.year %></td>
+    <td><%= @director.name %></td>
+    <% details_link = "/movies/" + a_thing.id.to_s %>
+    <td><a href=<%= details_link %>>Show details</a></td>
+    </tr>
+  <% end %>
+
+  </table>

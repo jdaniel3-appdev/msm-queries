@@ -1,0 +1,52 @@
+<h1>Movie #<%= @movie_id.to_s %> details</h1>
+
+<a href="/movies" class = "btn btn-block btn-outline-secondary">
+  Go back
+</a>
+
+&nbsp;|&nbsp;
+
+<hr>
+
+<dl>
+<dt>Name</dt>
+  <dd>
+    <%= @movie.title %>
+  </dd>
+
+<dt>Year</dt>
+  <dd>
+    <%= @movie.year %>
+  </dd>
+
+<dt>Duration</dt>
+  <dd>
+    <%= @movie.duration %>
+  </dd>
+
+<dt>Description</dt>
+  <dd>
+    <%= @movie.description %>
+  </dd>  
+
+<dt>Image</dt>
+  <dd>
+    <img src=<%= @movie.image %> style="width:250px;">
+  </dd>
+
+<dt>Description</dt>
+  <dd>
+    <%= @directed_by %>
+  </dd>  
+
+<dt>Created at</dt>
+  <dd>
+    <%= time_ago_in_words(@movie.created_at) %> ago
+  </dd>
+
+<dt>Updated at</dt>
+  <dd>
+    <%= time_ago_in_words(@movie.updated_at) %> ago
+  </dd>
+
+<hr>
